@@ -8,6 +8,7 @@ autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
 
 "special syntax
 au BufNewFile,BufRead *.less set filetype=css
+au BufNewFile,BufRead *.handlebars set filetype=html
 
 "Special Compile commands
 map <F2> :call Compile() <CR>
