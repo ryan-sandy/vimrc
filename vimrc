@@ -1,7 +1,22 @@
-syntax on
-"make the backspace work
-set backspace=2
+"Ryan Lee's vimrc.
+"Dependencies
+"pathogen
+"   https://github.com/tpope/vim-pathogen
+"sensible-vim
+"   https://github.com/tpope/vim-sensible
+"vim-template
+"   https://github.com/aperezdc/vim-template
+"syntastic
+"   https://github.com/scrooloose/syntastic
+
+
+execute pathogen#infect()
+
 set ts=2 shiftwidth=2 expandtab
+
+"use the templates directory
+let g:templates_directory = ['~/.vim/skel']
+let g:templates_debug = 1
 
 "setup over column color
 if exists('+colorcolumn')
@@ -10,8 +25,17 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
-"load the skeliton files
-autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
+"status line
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%l,%c%=%t%m
+
+"syntastic configs
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "special syntax
 au BufNewFile,BufRead *.less set filetype=css
@@ -21,8 +45,8 @@ au BufNewFile,BufRead *.md set filetype=markdown
 
 "Special Compile commands
 map <F2> :call Compile() <CR>
-au BufNewFile,BufRead *.js map <F2> :exec "!jslint %" <CR>
-au BufNewFile,BufRead *.json map <F2> :exec "!jslint %" <CR>
+au BufNewFile,BufRead *.js map <F2> :exec "!jshint %" <CR>
+au BufNewFile,BufRead *.json map <F2> :exec "!jshint %" <CR>
 "Special Run commands
 au BufNewFile,BufRead *.r map <F3> :exec "!Rscript %" <CR>
 au BufNewFile,BufRead *.js map <F3> :exec "!node %" <CR>
