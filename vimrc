@@ -10,6 +10,10 @@
 "   https://github.com/scrooloose/syntastic
 "Ctrlp
 "   https://kien.github.io/ctrlp.vim/
+"JSX Syntax
+"   https://github.com/mxw/vim-jsx
+"Javascript Syntax
+"   https://github.com/jelera/vim-javascript-syntax
 
 execute pathogen#infect()
 
@@ -53,6 +57,9 @@ au BufNewFile,BufRead *.less set filetype=css
 au BufNewFile,BufRead *.handlebars set filetype=html
 au BufNewFile,BufRead *.hbs set filetype=html
 au BufNewFile,BufRead *.md set filetype=markdown
+
+"JSX Config
+let g:jsx_ext_required = 0
 
 "Special Compile commands
 map <F2> :call Compile() <CR>
