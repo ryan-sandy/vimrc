@@ -8,7 +8,8 @@
 "   https://github.com/aperezdc/vim-template
 "syntastic
 "   https://github.com/scrooloose/syntastic
-
+"Ctrlp
+"   https://kien.github.io/ctrlp.vim/
 
 execute pathogen#infect()
 
@@ -25,6 +26,10 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
+"ctrlp
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 "status line
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -36,6 +41,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+" Point syntastic checker at locally installed `eslint` if it exists.
+"if executable('node_modules/.bin/eslint')
+"  let b:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
+"endif
 
 "special syntax
 au BufNewFile,BufRead *.less set filetype=css
