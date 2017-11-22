@@ -19,6 +19,8 @@ execute pathogen#infect()
 
 set ts=2 shiftwidth=2 expandtab
 
+set clipboard=unnamed
+
 "use the templates directory
 let g:templates_directory = ['~/.vim/skel']
 let g:templates_debug = 1
@@ -46,11 +48,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-
-" Point syntastic checker at locally installed `eslint` if it exists.
-"if executable('node_modules/.bin/eslint')
-"  let b:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
-"endif
+"local eslint
+let g:syntastic_javascript_eslint_exec=substitute(system('npm bin'), '[\]\|[[:cntrl:]]', '', 'g').'/eslint'
 
 "special syntax
 au BufNewFile,BufRead *.less set filetype=css
