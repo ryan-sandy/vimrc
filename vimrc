@@ -49,8 +49,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 "local eslint
-let g:syntastic_javascript_eslint_exec=substitute(system('npm bin'), '[\]\|[[:cntrl:]]', '', 'g').'/eslint'
-
+"NOTE: Future Ryan, figure out how to set eslint as a variable
+if filereadable(substitute(system('npm bin'), '[\]\|[[:cntrl:]]', '', 'g').'/eslint')
+  let g:syntastic_javascript_eslint_exec=substitute(system('npm bin'), '[\]\|[[:cntrl:]]', '', 'g').'/eslint'
+endif
 "special syntax
 au BufNewFile,BufRead *.less set filetype=css
 au BufNewFile,BufRead *.handlebars set filetype=html
