@@ -1,29 +1,20 @@
 "Ryan Lee's vimrc.
-"Dependencies
-"pathogen
-"   https://github.com/tpope/vim-pathogen
-"sensible-vim
-"   https://github.com/tpope/vim-sensible
-"vim-template
-"   https://github.com/aperezdc/vim-template
-"syntastic
-"   https://github.com/scrooloose/syntastic
-"Ctrlp
-"   https://kien.github.io/ctrlp.vim/
-"JSX Syntax
-"   https://github.com/mxw/vim-jsx
-"Javascript Syntax
-"   https://github.com/jelera/vim-javascript-syntax
-
-execute pathogen#infect()
+call plug#begin('~/.vim/plugged')
+Plug 'https://github.com/tpope/vim-sensible'
+Plug 'https://github.com/aperezdc/vim-template.git'
+Plug 'https://github.com/scrooloose/syntastic'
+Plug 'https://github.com/kien/ctrlp.vim.git'
+Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'
+Plug 'https://github.com/pangloss/vim-javascript'
+call plug#end()
 
 set ts=2 shiftwidth=2 expandtab
 
 set clipboard=unnamed
 
 "use the templates directory
-let g:templates_directory = ['~/.vim/skel']
-let g:templates_debug = 1
+let g:templates_directory = ['~/.vim/templates']
+let g:templates_debug = 0
 
 "setup over column color
 if exists('+colorcolumn')
@@ -73,6 +64,19 @@ au BufNewFile,BufRead *.cpp map <F3> :exec "!make run" <CR>
 
 filetype plugin on
 
+"wrap
+"see https://vim.fandom.com/wiki/Move_cursor_by_display_lines_when_wrapping
+nnoremap k gk
+nnoremap j gj
+vnoremap k gk
+vnoremap j gj
+
+"better window moving
+noremap wj <C-W><C-J>
+noremap wk <C-W><C-K>
+noremap wl <C-W><C-L>
+noremap wh <C-W><C-H>
+
 "short cuts
 abb ifn if (err) { return next(err); }
 abb ifc if (err) { return cb(err); }
@@ -95,3 +99,6 @@ endfunc
 func! Test()
   exec "!make test"
 endfunc
+
+"hardcopy
+set printoptions=paper:letter
