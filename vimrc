@@ -4,13 +4,19 @@ Plug 'https://github.com/tpope/vim-sensible'
 Plug 'https://github.com/aperezdc/vim-template.git'
 Plug 'https://github.com/scrooloose/syntastic'
 Plug 'https://github.com/kien/ctrlp.vim.git'
-Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'
-Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'https://github.com/sheerun/vim-polyglot.git'
+"Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'
+"Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'https://github.com/ryan-sandy/tender.vim'
+Plug 'https://github.com/mtscout6/syntastic-local-eslint.vim.git'
 call plug#end()
 
 set ts=2 shiftwidth=2 expandtab
 
 set clipboard=unnamed
+
+"colors
+colorscheme tender
 
 "use the templates directory
 let g:templates_directory = ['~/.vim/templates']
@@ -39,11 +45,17 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-"local eslint
-"NOTE: Future Ryan, figure out how to set eslint as a variable
-if filereadable(substitute(system('npm bin'), '[\]\|[[:cntrl:]]', '', 'g').'/eslint')
-  let g:syntastic_javascript_eslint_exec=substitute(system('npm bin'), '[\]\|[[:cntrl:]]', '', 'g').'/eslint'
-endif
+let g:syntastic_javascript_eslint_exe='$(yarn bin)/eslint'
+
+function! FindConfig(prefix, what, where)
+    let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+    echo cfg
+    return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+endfunction
+
+autocmd FileType javascript let b:syntastic_javascript_eslint_args =
+    \ get(g:, 'syntastic_javascript_eslint', '') .
+    \ FindConfig('-c', '.eslintrc.json', expand('<afile>:p:h', 1))
 "special syntax
 au BufNewFile,BufRead *.less set filetype=css
 au BufNewFile,BufRead *.handlebars set filetype=html
