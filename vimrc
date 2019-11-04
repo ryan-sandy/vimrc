@@ -49,7 +49,6 @@ let g:syntastic_javascript_eslint_exe='$(yarn bin)/eslint'
 
 function! FindConfig(prefix, what, where)
     let cfg = findfile(a:what, escape(a:where, ' ') . ';')
-    echo cfg
     return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
 endfunction
 
