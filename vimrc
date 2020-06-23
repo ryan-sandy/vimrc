@@ -5,10 +5,11 @@ Plug 'https://github.com/aperezdc/vim-template.git'
 Plug 'https://github.com/scrooloose/syntastic'
 Plug 'https://github.com/kien/ctrlp.vim.git'
 Plug 'https://github.com/sheerun/vim-polyglot.git'
-"Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'
-"Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/ryan-sandy/tender.vim'
 Plug 'https://github.com/mtscout6/syntastic-local-eslint.vim.git'
+"Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'
+"Plug 'https://github.com/pangloss/vim-javascript'
 call plug#end()
 
 set ts=2 shiftwidth=2 expandtab
